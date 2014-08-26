@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: WP SyntaxHighlighter Evolved theme
-Version: 5.1.0
-Description: plugin hỗ trợ flance
+Version: 1.0.0
+Description: Custom theme for SyntaxHighlighter plugin
 Author: Vô Minh
-Plugin URI: http://muatocroi.com
+Plugin URI: http://laptrinh.senviet.org
 */
 
 include dirname( __FILE__ ) . '/scb/load.php';

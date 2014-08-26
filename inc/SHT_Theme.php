@@ -21,28 +21,28 @@ class SHT_Theme
         return self::$instance;
     }
 
-    public function __construct()
-    {
-        $this->themes = array(
-            'senviet'  => array('name' => 'Sen Việt', 'slug'=>'senviet', 'filename'=>'shThemeSenViet.css')
-        );
-        add_action( 'wp_enqueue_scripts', array( $this, 'sht_syntaxhighlighter_register_theme_styles' ) );
-        add_action( 'admin_enqueue_scripts', array( $this, 'sht_syntaxhighlighter_register_theme_styles' ) );
-        add_filter('syntaxhighlighter_themes', array($this, 'sht_syntaxhighlighter_add_themes'), 10, 1);
+public function __construct()
+{
+    $this->themes = array(
+        'senviet'  => array('name' => 'Sen Việt', 'slug'=>'senviet', 'filename'=>'shThemeSenViet.css')
+    );
+    add_action( 'wp_enqueue_scripts', array( $this, 'sht_syntaxhighlighter_register_theme_styles' ) );
+    add_action( 'admin_enqueue_scripts', array( $this, 'sht_syntaxhighlighter_register_theme_styles' ) );
+    add_filter('syntaxhighlighter_themes', array($this, 'sht_syntaxhighlighter_add_themes'), 10, 1);
+}
+
+public function sht_syntaxhighlighter_add_themes($themes)
+{
+    foreach ($this->themes as $id => $theme) {
+        $themes[$theme['slug']] = $theme['name'];
     }
 
-    public function sht_syntaxhighlighter_add_themes($themes)
-    {
-        foreach ($this->themes as $id => $theme) {
-            $themes[$theme['slug']] = $theme['name'];
-        }
+    return $themes;
+}
 
-        return $themes;
-    }
-
-    public function sht_syntaxhighlighter_register_theme_styles()
-    {
-        foreach ($this->themes as $slug => $theme) {
-            wp_register_style( 'syntaxhighlighter-theme-' . $theme["slug"], plugins_url( 'themes/' . $theme["filename"], dirname(__FILE__) ), array( 'syntaxhighlighter-core' ), '20140330', 'all' );
-        }}
-} 
+public function sht_syntaxhighlighter_register_theme_styles() {
+	foreach ( $this->themes as $slug => $theme ) {
+		wp_register_style( 'syntaxhighlighter-theme-' . $theme["slug"], plugins_url( 'themes/' . $theme["filename"], dirname( __FILE__ ) ), array( 'syntaxhighlighter-core' ), '20140330', 'all' );
+	}
+}
+}
